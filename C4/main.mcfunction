@@ -17,4 +17,8 @@ execute @e[tag=placeC4] ~ ~ ~ kill @s
 ## C4 Detonator ##
 scoreboard players tag @e[type=item] add detonator {Item:{id:"minecraft:redstone_torch",Count:1b,tag:{display:{Name:"Detonator"}}}}
 scoreboard players tag @a add holdingDetonator {SelectedItem:{id:"minecraft:redstone_torch",tag:{display:{Name:"Detonator"}}}}
-execute @a[tag=holdingDetonator] ~ ~ ~ execute @e[tag=c4,r=20] ~ ~ ~ title @p[tag=holdingDetonator,r=20] 
+execute @a[tag=holdingDetonator] ~ ~ ~ execute @e[tag=c4,r=20] ~ ~ ~ title @p[tag=holdingDetonator,r=20] actionbar {"text","Detonate C4","color":"red"}
+scoreboard players tag @a[tag=holdingDetonator] remove holdingDetonator
+execute @e[type=item,tag=detonator] ~ ~ ~ execute @e[tag=c4,r=20] ~ ~ ~ summon tnt ~ ~ ~ {Fuse:0}
+execute @e[tag=c4] ~ ~ ~ detect ~ ~ ~ air 0 kill @s
+
